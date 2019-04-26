@@ -6,7 +6,6 @@ import java.time.ZoneId;
 
 public class RealClock extends Clock {
     private Instant onClockStart = Instant.now();
-    private long count = 0L;
 
     @Override
     public ZoneId getZone() {
@@ -20,7 +19,6 @@ public class RealClock extends Clock {
 
     @Override
     public Instant instant() {
-        ++count;
-        return onClockStart.plusSeconds(count);
+        return Instant.now();
     }
 }

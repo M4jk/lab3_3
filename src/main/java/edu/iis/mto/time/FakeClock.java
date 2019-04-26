@@ -5,8 +5,13 @@ import java.time.Instant;
 import java.time.ZoneId;
 
 public class FakeClock extends Clock {
-    private Instant onClockStart = Instant.now().plusSeconds(-100000L);
+    private Instant onClockStart = Instant.now();
     private long count = 0L;
+    private long secondsToBeAddedToInstantOfClock;
+
+    public FakeClock(long secondsToBeAddedToInstantOfClock) {
+        this.secondsToBeAddedToInstantOfClock = secondsToBeAddedToInstantOfClock;
+    }
 
     @Override
     public ZoneId getZone() {
@@ -20,7 +25,8 @@ public class FakeClock extends Clock {
 
     @Override
     public Instant instant() {
-        ++count;
-        return onClockStart.plusSeconds(count);
+        Instant returnedInstant = Instant.now().plusSeconds(count);
+        count += secondsToBeAddedToInstantOfClock;
+        return returnedInstant;
     }
 }

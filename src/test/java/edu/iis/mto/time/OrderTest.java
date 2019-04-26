@@ -9,7 +9,7 @@ public class OrderTest {
 
     @Test(expected = OrderExpiredException.class)
     public void testOrderConfirmedAfterValidPeriodHours() {
-        Order order = new Order(new FakeClock());
+        Order order = new Order(new FakeClock(100000L));
         order.submit();
         order.confirm();
     }
